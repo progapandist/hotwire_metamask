@@ -23,13 +23,12 @@ registry:
   # Always use an access token rather than real password when possible.
   password:
     - KAMAL_REGISTRY_PASSWORD
+
 # Inject ENV variables into containers (secrets come from .env).
 # Remember to run `kamal env push` after making changes!
-# env:
-#   clear:
-#     DB_HOST: 192.168.0.2
-#   secret:
-#     - RAILS_MASTER_KEY
+env:
+  secret:
+    - RAILS_MASTER_KEY
 
 # Use a different ssh user than root
 # ssh:
@@ -81,7 +80,7 @@ traefik:
     entryPoints.web.http.redirections.entryPoint.to: websecure # We want to force https
     entryPoints.web.http.redirections.entryPoint.scheme: https
     entryPoints.web.http.redirections.entrypoint.permanent: true
-    certificatesResolvers.letsencrypt.acme.email: "email@example.com"
+    certificatesResolvers.letsencrypt.acme.email: "andrey@hey.com"
     certificatesResolvers.letsencrypt.acme.storage: "/letsencrypt/acme.json" # Must match the path in `volume`
     certificatesResolvers.letsencrypt.acme.httpchallenge: true
     certificatesResolvers.letsencrypt.acme.httpchallenge.entrypoint: web # Must match the role in `servers`
