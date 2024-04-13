@@ -23,3 +23,6 @@ build-prod:
 # Push the Docker image to Docker Hub
 push:
 	docker push $(IMAGE_NAME):$(VERSION)
+
+prod-console:
+	kamal app exec 'bin/rails c' -i --reuse
