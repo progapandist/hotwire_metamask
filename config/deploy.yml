@@ -7,8 +7,7 @@ image: progapandist/presail-task
 # Configure custom arguments for Traefik
 servers:
   web: # Use a named role, so it can be used as entrypoint by Traefik
-    hosts:
-      - 161.35.247.212
+    - 165.22.192.130
   labels:
     traefik.http.routers.blog.entrypoints: websecure
     traefik.http.routers.blog.rule: Host(`presail-task.progapanda.org`)
@@ -106,8 +105,8 @@ traefik:
 #
 # Caution: there's no support for role renaming yet, so be careful to cleanup
 #          the previous role on the deployed hosts.
-primary_role: web
+# primary_role: web
 # Controls if we abort when see a role with no hosts. Disabling this may be
 # useful for more complex deploy configurations.
 #
-# allow_empty_roles: false
+allow_empty_roles: true
