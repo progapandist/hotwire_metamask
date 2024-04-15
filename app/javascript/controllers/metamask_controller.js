@@ -14,38 +14,14 @@ export default class extends Controller {
       console.error(
         "MetaMask is not installed. Please install MetaMask to use this feature."
       );
-      // Optionally, inform the user via UI that MetaMask is required
     }
   }
 
-  signOut() {
-    // Assuming sign-out does not need to interact with MetaMask
-    // but rather, you're clearing session data on your server
-    fetch("/auth/logout", {
-      method: "DELETE",
-      headers: {
-        "X-CSRF-Token": document.querySelector("[name='csrf-token']").content,
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        if (response.ok) {
-          console.log("Logged out successfully");
-          // Redirect the user or refresh the page
-          window.location.reload();
-        } else {
-          throw new Error("Logout failed");
-        }
-      })
-      .catch((error) => console.error("Error:", error));
-  }
-
   async signIn() {
-    // Guard clause to ensure early exit if MetaMask is not available
     if (typeof window.ethereum === "undefined") {
       console.error("MetaMask is not installed!");
       alert("Please install MetaMask to continue.");
-      return; // Stop execution if MetaMask is not found
+      return;
     }
 
     try {
@@ -53,37 +29,65 @@ export default class extends Controller {
         method: "eth_requestAccounts",
       });
       const account = accounts[0];
-      this.addressTarget.value = account; // Sets the value of the input field
-
-      this.submitAddressToBackend(account);
+      this.addressTarget.value = account;
+      await this.submitAddressToBackend(account);
     } catch (error) {
       console.error("Error signing in with MetaMask:", error);
-      // Handle specific errors, e.g., user rejection, and inform the user appropriately
     }
   }
 
-  // Update the submitAddressToBackend method
-  submitAddressToBackend(account) {
-    fetch("/auth/metamask", {
-      method: "POST",
-      headers: {
-        "X-CSRF-Token": document.querySelector("[name='csrf-token']").content,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ethereum_address: account,
-      }),
-    })
-      .then((response) => response.json()) // Directly parsing as JSON
-      .then((data) => {
-        if (data.success) {
-          // Redirect the user or refresh the page
-          window.location.reload();
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        this.showToast("Error", "error");
+  async signOut() {
+    try {
+      const response = await fetch("/auth/logout", {
+        method: "DELETE",
+        headers: {
+          "X-CSRF-Token": document.querySelector("[name='csrf-token']").content,
+          "Content-Type": "application/json",
+        },
       });
+      if (response.ok) {
+        console.log("Logged out successfully");
+        window.location.reload();
+      } else {
+        throw new Error("Logout failed");
+      }
+    } catch (error) {
+      this.showToast(
+        `Error: ${error}`,
+        "An error occurred while processing your request."
+      );
+    }
+  }
+
+  async submitAddressToBackend(account) {
+    try {
+      const response = await fetch("/auth/metamask", {
+        method: "POST",
+        headers: {
+          "X-CSRF-Token": document.querySelector("[name='csrf-token']").content,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ethereum_address: account,
+        }),
+      });
+      const data = await response.json();
+      if (data.success) {
+        window.location.reload();
+      } else {
+        throw new Error("Server responded with an error");
+      }
+    } catch (error) {
+      // Assuming showToast is a method to show UI notifications - you would need to define this.
+      this.showToast(
+        `Error: ${error}`,
+        "An error occurred while processing your request."
+      );
+    }
+  }
+
+  showToast(title, message) {
+    // Just the console log for now but can use Turbo Streams here!
+    console.log(`${title}: ${message}`);
   }
 }

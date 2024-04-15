@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root "sessions#new"
   resource :sessions, only: [:new]
-  post "/auth/metamask", to: "sessions#metamask_auth"
+  post "/auth/metamask", to: "sessions#create"
   delete "/auth/logout", to: "sessions#destroy"
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
