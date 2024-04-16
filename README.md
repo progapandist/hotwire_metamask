@@ -1,4 +1,4 @@
-# Presail Rails 7 (Hotwire) ft. Metamask login Demo
+# Presail Rails 7.1.3 (Hotwire) ft. Metamask login Demo
 
 > Time taken for `rails new` + Metamask integration: 4 hours
 > Time taken for Kamal deployment took ~5 hours (as I had to research Kamal a bit that I was actively aware of but never set it up myself. The Letsencrypt part is missing from the docs so I had to dig a bit to make it work via HTTPS)
@@ -24,9 +24,17 @@ rails new my_web3_app --database=sqlite3 --skip-sprockets --skip-javascript --sk
 
 ## UI Flow
 
+
+
 ## Kamal Deploy Flow (for the curious)
 
 Note that each deploy currently clears the DB for the sake of demo, but it can be easily mitigated by using a persistent DB like Postgres or MySQL. Or by replicating SQLite with Fly.io. Or by storing SQLite on a volume on a VPS.
+
+
+
+https://github.com/progapandist/hotwire_metamask/assets/12513436/84020807-8829-404d-bb3e-118239b9c148
+
+
 
 ## Testing considerations
 
