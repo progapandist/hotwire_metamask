@@ -7,6 +7,10 @@ class SessionsController < ApplicationController
   LOGIN_FAILED = "Log in failed."
   LOGOUT_FAILURE = "Log out failed."
 
+  def index
+    render json: User.all, status: :ok
+  end
+
   def new
   end
 

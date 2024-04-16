@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root "sessions#new"
-  resource :sessions, only: [:new]
+  resources :sessions, only: [:new, :index]
   post "/auth/metamask", to: "sessions#create"
   delete "/auth/logout", to: "sessions#destroy"
 
