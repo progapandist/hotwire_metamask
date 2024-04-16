@@ -26,6 +26,10 @@ rails new my_web3_app --database=sqlite3 --skip-sprockets --skip-javascript --sk
 
 
 
+https://github.com/progapandist/hotwire_metamask/assets/12513436/5d64df2e-4f53-484e-9186-5d9152b5ad51
+
+
+
 ## Kamal Deploy Flow (for the curious)
 
 Note that each deploy currently clears the DB for the sake of demo, but it can be easily mitigated by using a persistent DB like Postgres or MySQL. Or by replicating SQLite with Fly.io. Or by storing SQLite on a volume on a VPS.
