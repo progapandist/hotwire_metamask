@@ -12,7 +12,7 @@ export default class extends Controller {
       console.log("MetaMask is installed!");
     } else {
       console.error(
-        "MetaMask is not installed. Please install MetaMask to use this feature."
+        "MetaMask is not installed. Please install MetaMask to use this feature.",
       );
     }
   }
@@ -54,7 +54,7 @@ export default class extends Controller {
     } catch (error) {
       this.showToast(
         `Error: ${error}`,
-        "An error occurred while processing your request."
+        "An error occurred while processing your request.",
       );
     }
   }
@@ -81,7 +81,7 @@ export default class extends Controller {
       // Assuming showToast is a method to show UI notifications - you would need to define this.
       this.showToast(
         `Error: ${error}`,
-        "An error occurred while processing your request."
+        "An error occurred while processing your request.",
       );
     }
   }

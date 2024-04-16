@@ -1,49 +1,8 @@
 <div class="gap-y-8">
-  <div
-    class="
-      max-w-md mx-auto mt-10 bg-white p-8 border border-gray-200 rounded-lg shadow-sm
-    "
-  >
-    <% if current_user %>
-      <h1 class="text-xl font-semibold text-center text-gray-800 mb-4">Success! Click to sign out</h1>
-    <% else %>
-      <h1 class="text-xl font-semibold text-center text-gray-800 mb-4">Sign in with MetaMask</h1>
-    <% end %>
-    <div class="mt-4">
-      <%= form_with url: "/auth/metamask", method: "post", data: { controller: "metamask" }, class: "space-y-6" do |form| %>
-        <%= form.hidden_field :ethereum_address, data: { metamask_target: "address" } %>
-        <div class="text-center">
-          <!-- Button -->
-          <% if current_user %>
-            <button
-              type="button"
-              data-action="click->metamask#signOut"
-              class="
-                w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm
-                text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700
-                focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
-              "
-            >
-              <%= current_user.ethereum_address %>
-            </button>
-          <% else %>
-            <button
-              type="button"
-              data-action="click->metamask#signIn"
-              class="
-                w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm
-                text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700
-                focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
-              "
-            >
-              Sign in with MetaMask
-            </button>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
-  </div>
 
+  <%= render "new" %>
+
+  <%# Just to check that it works 🤓 %>
   <div
     class="
       max-w-md mx-auto mt-10 bg-white p-8 border border-gray-200 rounded-lg shadow-sm
