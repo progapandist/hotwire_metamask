@@ -114,3 +114,7 @@ class UsersSignInWithMetaMaskTest < ApplicationSystemTestCase
   end
 end
 ```
+
+## Proposed Improvements 
+
+I would love to see WebAuthn and biometric Passkeys (now availale in Apple devices to work hand in hand as a possible second factor for the anonymous Metamask login. 
